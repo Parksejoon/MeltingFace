@@ -1,0 +1,15 @@
+﻿  Camera.cpp
+  Direct3D.cpp
+C:\Users\parks\source\repos\MeltingFace\MeltingFace\Direct3D.cpp(90,21): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\parks\source\repos\MeltingFace\MeltingFace\Direct3D.cpp(280,20): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\parks\source\repos\MeltingFace\MeltingFace\Direct3D.cpp(281,21): warning C4244: '=': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\parks\source\repos\MeltingFace\MeltingFace\Direct3D.cpp(290,30): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\parks\source\repos\MeltingFace\MeltingFace\Direct3D.cpp(294,55): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\parks\source\repos\MeltingFace\MeltingFace\Direct3D.cpp(294,42): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\parks\source\repos\MeltingFace\MeltingFace\Direct3D.cpp(29,16): warning C4101: 'i' :참조되지 않은 지역 변수입니다.
+  Graphics.cpp
+  Main.cpp
+  Model.cpp
+  System.cpp
+  코드를 생성하고 있습니다...
+  MeltingFace.vcxproj -> C:\Users\parks\source\repos\MeltingFace\x64\Debug\MeltingFace.exe
