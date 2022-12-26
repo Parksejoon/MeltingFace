@@ -32,7 +32,7 @@ namespace MF
 		m_Camera->SetPosition(0.0f, 0.0f, -10.0f);
 
 		m_Model = new Model;
-		result = m_Model->Initialize(m_Direct3D->GetDevice());
+		result = m_Model->Initialize(m_Direct3D->GetDevice(), "Sphere.obj");
 		if (!result)
 		{
 			MessageBox(hwnd, L"Model 초기화에 실패하였습니다.", L"Error", MB_OK);
