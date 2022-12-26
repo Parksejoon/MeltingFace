@@ -17,6 +17,7 @@ namespace MF
 		{
 			XMFLOAT3 position;
 			XMFLOAT4 color;
+			XMFLOAT3 normal;
 		};
 
 	public:

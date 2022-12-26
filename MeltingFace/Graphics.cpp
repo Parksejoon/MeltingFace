@@ -7,7 +7,9 @@ namespace MF
 		m_Direct3D = nullptr;
 		m_Camera = nullptr;
 		m_Model = nullptr;
-		m_ColorShader = nullptr;
+		//m_ColorShader = nullptr;
+		m_LightShader = nullptr;
+		m_Light = nullptr;
 	}
 
 	Graphics::Graphics(const Graphics&)
@@ -39,25 +41,50 @@ namespace MF
 			return false;
 		}
 
-		m_ColorShader = new ColorShader;
+		/*m_ColorShader = new ColorShader;
 		result = m_ColorShader->Initialize(m_Direct3D->GetDevice(), hwnd);
 		if (!result)
 		{
 			MessageBox(hwnd, L"ColorShader 초기화에 실패하였습니다.", L"Error", MB_OK);
 			return false;
+		}*/
+
+		m_LightShader = new LightShader;
+		result = m_LightShader->Initailize(m_Direct3D->GetDevice(), hwnd);
+		if (!result)
+		{
+			MessageBox(hwnd, L"LightShader 초기화에 실패하였습니다.", L"Error", MB_OK);
+			return false;
 		}
+
+		m_Light = new Light;
+		m_Light->SetDiffuseColor(1.0f, 1.0f, 1.0f, 1.0f);
+		m_Light->SetDirection(0.0f, 0.0f, 1.0f);
 
 		return true;
 	}
 
 	void Graphics::Shutdown()
 	{
-		if (m_ColorShader)
+		if (m_Light)
+		{
+			delete m_Light;
+			m_Light = nullptr;
+		}
+
+		if (m_LightShader)
+		{
+			m_LightShader->Shutdown();
+			delete m_LightShader;
+			m_LightShader = nullptr;
+		}
+
+		/*if (m_ColorShader)
 		{
 			m_ColorShader->Shutdown();
 			delete m_ColorShader;
 			m_ColorShader = nullptr;
-		}
+		}*/
 
 		if (m_Model)
 		{
@@ -82,10 +109,18 @@ namespace MF
 
 	bool Graphics::Frame()
 	{
-		return Render();
+		static float rotation = 0.0f;
+
+		rotation += (float)XM_PI * 0.01f;
+		if (rotation > 360.0f)
+		{
+			rotation -= 360.0f;
+		}
+
+		return Render(rotation);
 	}
 
-	bool Graphics::Render()
+	bool Graphics::Render(float rotation)
 	{
 		m_Direct3D->BeginScene(0.0f, 0.0f, 0.0f, 1.0f);
 
@@ -99,14 +134,25 @@ namespace MF
 		m_Direct3D->GetWorldMatrix(worldMatrix);
 		m_Direct3D->GetProjectionMatrix(projectionMatrix);
 
+		worldMatrix *= XMMatrixRotationY(rotation);
+
 		m_Model->Render(m_Direct3D->GetDeviceContext());
 
-		bool result = m_ColorShader->Render(
+		/*bool result = m_ColorShader->Render(
 			m_Direct3D->GetDeviceContext(),
 			m_Model->GetIndexCount(),
 			worldMatrix,
 			viewMatrix,
-			projectionMatrix);
+			projectionMatrix);*/
+		bool result = m_LightShader->Render(
+			m_Direct3D->GetDeviceContext(),
+			m_Model->GetIndexCount(),
+			worldMatrix,
+			viewMatrix,
+			projectionMatrix,
+			nullptr,
+			m_Light->GetDirection(),
+			m_Light->GetDiffuseColor());
 		if (!result)
 		{
 			return false;

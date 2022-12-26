@@ -69,6 +69,7 @@ namespace MF
 			VertexInfo info = m_vertexInfos[i];
 			vertices[i].position = XMFLOAT3(info.x, info.y, info.z);
 			vertices[i].color = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+			vertices[i].normal = XMFLOAT3(info.nx, info.ny, info.nz);
 			
 			indices[i] = i;
 		}

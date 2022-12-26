@@ -5,7 +5,9 @@
 #include "Direct3D.h"
 #include "Camera.h"
 #include "Model.h"
-#include "ColorShader.h"
+//#include "ColorShader.h"
+#include "LightShader.h"
+#include "Light.h"
 
 namespace MF
 {
@@ -26,12 +28,14 @@ namespace MF
 		bool Frame();
 
 	private:
-		bool Render();
+		bool Render(float);
 
 	private:
 		Direct3D* m_Direct3D;
 		Camera* m_Camera;
 		Model* m_Model;
-		ColorShader* m_ColorShader;
+		//ColorShader* m_ColorShader;
+		LightShader* m_LightShader;
+		Light* m_Light;
 	};
 }
